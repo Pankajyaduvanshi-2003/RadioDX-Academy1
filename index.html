@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RADIO DX — See. Understand. Diagnose. | Radiology & Medical Imaging Education</title>
+<meta name="description" content="RADIO DX is a premium radiology and medical imaging education platform covering MRI, CT, X-Ray, Ultrasound, Nuclear Medicine and Interventional Radiology — concepts, protocols, cases, tools and exam preparation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --navy:#0B1F33;
+  --navy-2:#0F2740;
+  --blue:#1769AA;
+  --cyan:#18B6C9;
+  --bg:#F7FAFC;
+  --white:#FFFFFF;
+  --text:#17212B;
+  --text-2:#64748B;
+  --border:#E2E8F0;
+  --success:#16A34A;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:18px;
+  --shadow-sm:0 1px 2px rgba(11,31,51,0.06), 0 1px 1px rgba(11,31,51,0.04);
+  --shadow-md:0 8px 24px rgba(11,31,51,0.08);
+  --shadow-lg:0 24px 60px rgba(11,31,51,0.14);
+  --mono:'JetBrains Mono', ui-monospace, monospace;
+  --sans:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+img,svg{display:block; max-width:100%;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+ul{list-style:none;}
+:focus-visible{outline:2px solid var(--cyan); outline-offset:2px; border-radius:4px;}
+.container{max-width:1240px; margin:0 auto; padding:0 24px;}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--blue);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--cyan);display:inline-block;}
+h1,h2,h3,h4{font-weight:800; letter-spacing:-0.02em; color:var(--navy);}
+.section{padding:96px 0;}
+.section-head{max-width:640px; margin-bottom:56px;}
+.section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+.section-title{font-size:clamp(28px,3.4vw,42px); margin-top:14px; line-height:1.12;}
+.section-sub{color:var(--text-2); font-size:17px; margin-top:14px; max-width:560px;}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 24px; border-radius:10px; font-weight:600; font-size:15px;
+  border:1px solid transparent; transition:all .18s ease; white-space:nowrap;
+}
+.btn-primary{background:var(--navy); color:#fff;}
+.btn-primary:hover{background:var(--blue); transform:translateY(-1px); box-shadow:var(--shadow-md);}
+.btn-secondary{background:#fff; color:var(--navy); border-color:var(--border);}
+.btn-secondary:hover{border-color:var(--blue); color:var(--blue);}
+.btn-ghost{color:var(--blue); font-weight:600; font-size:14px; display:inline-flex; align-items:center; gap:6px;}
+.btn-ghost svg{transition:transform .18s ease;}
+.btn-ghost:hover svg{transform:translateX(3px);}
+.pill{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.04em;
+  padding:4px 9px; border-radius:5px; background:rgba(23,105,170,.08); color:var(--blue);
+}
+
+/* ============ NAV ============ */
+.nav{
+  position:sticky; top:0; z-index:100;
+  background:rgba(247,250,252,0.82);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; height:72px;}
+.logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; color:var(--navy); letter-spacing:-0.01em;}
+.logo-mark{
+  width:32px; height:32px; border-radius:8px;
+  background:linear-gradient(155deg, var(--navy) 0%, var(--blue) 60%, var(--cyan) 100%);
+  position:relative; flex-shrink:0;
+}
+.logo-mark::after{
+  content:""; position:absolute; inset:8px; border:1.5px solid rgba(255,255,255,.85); border-radius:2px;
+}
+.nav-links{display:flex; gap:6px; align-items:center;}
+.nav-links a{
+  padding:9px 14px; border-radius:8px; font-size:14.5px; font-weight:500; color:var(--text);
+  transition:background .15s ease, color .15s ease;
+}
+.nav-links a:hover{background:rgba(23,105,170,.07); color:var(--blue);}
+.nav-actions{display:flex; align-items:center; gap:10px;}
+.icon-btn{
+  width:38px; height:38px; display:inline-flex; align-items:center; justify-content:center;
+  border-radius:8px; border:1px solid transparent; color:var(--text-2);
+}
+.icon-btn:hover{background:#fff; border-color:var(--border); color:var(--navy);}
+.hamburger{display:none;}
+.mobile-menu{display:none;}
+
+/* ============ HERO ============ */
+.hero{position:relative; overflow:hidden; padding:72px 0 96px;}
+.hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+.hero-headline{
+  font-size:clamp(38px,5.4vw,64px); line-height:1.03; margin-top:18px; letter-spacing:-0.03em;
+}
+.hero-headline .accent{color:var(--blue);}
+.hero-sub{margin-top:22px; font-size:18px; color:var(--text-2); max-width:520px; line-height:1.6;}
+.hero-cta{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+.hero-stats{display:flex; gap:36px; margin-top:48px; flex-wrap:wrap;}
+.hero-stat b{display:block; font-size:24px; font-weight:800; color:var(--navy); font-family:var(--mono);}
+.hero-stat span{font-size:13px; color:var(--text-2);}
+
+/* PACS viewer signature element */
+.scan-frame{
+  position:relative; border-radius:16px; overflow:hidden;
+  background:#000;
+  box-shadow:var(--shadow-lg);
+  border:1px solid #0B1F33;
+  aspect-ratio:4/4.6;
+}
+.scan-frame .topbar{
+  position:absolute; top:0; left:0; right:0; z-index:5;
+  display:flex; justify-content:space-between; padding:12px 14px;
+  font-family:var(--mono); font-size:10.5px; color:rgba(255,255,255,.72); letter-spacing:.02em;
+}
+.scan-frame .corner{position:absolute; z-index:5; font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.6); line-height:1.5;}
+.scan-frame .tl{top:38px; left:14px;}
+.scan-frame .tr{top:38px; right:14px; text-align:right;}
+.scan-frame .bl{bottom:14px; left:14px;}
+.scan-frame .br{bottom:14px; right:14px; text-align:right;}
+.scan-frame .crosshair{position:absolute; z-index:4; pointer-events:none;}
+.scan-frame .crosshair::before, .scan-frame .crosshair::after{content:""; position:absolute; background:rgba(24,182,201,.55);}
+.scan-frame .crosshair::before{width:1px; height:100%; left:50%;}
+.scan-frame .crosshair::after{height:1px; width:100%; top:50%;}
+.scan-canvas{position:absolute; inset:0;}
+.float-card{
+  position:absolute; background:#fff; border:1px solid var(--border); border-radius:12px;
+  padding:12px 14px; box-shadow:var(--shadow-md); z-index:10; min-width:170px;
+}
+.float-card .fc-label{font-family:var(--mono); font-size:10px; color:var(--text-2); letter-spacing:.06em; text-transform:uppercase;}
+.float-card .fc-value{font-weight:700; font-size:14.5px; color:var(--navy); margin-top:3px;}
+.float-card .fc-dot{width:7px; height:7px; border-radius:50%; background:var(--cyan); display:inline-block; margin-right:6px;}
+.fc-1{top:8%; left:-8%;}
+.fc-2{bottom:14%; right:-9%;}
+.fc-3{top:46%; left:-11%;}
+
+/* ============ VALUE BAR ============ */
+.value-bar{background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 0;}
+.value-bar h3{font-size:19px; text-align:center; color:var(--navy); font-weight:700; margin-bottom:32px;}
+.value-items{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap;}
+.value-item{display:flex; align-items:center; gap:10px; flex:1; min-width:180px; justify-content:center;}
+.value-item svg{color:var(--blue); flex-shrink:0;}
+.value-item span{font-size:14.5px; font-weight:600; color:var(--text);}
+
+/* ============ MODALITY CARDS ============ */
+.modality-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.modality-card{
+  background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:28px; transition:box-shadow .2s ease, transform .2s ease; position:relative; overflow:hidden;
+}
+.modality-card:hover{box-shadow:var(--shadow-md); transform:translateY(-3px);}
+.modality-card .m-icon{
+  width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(155deg, rgba(23,105,170,.08), rgba(24,182,201,.12));
+  color:var(--blue); margin-bottom:20px;
+}
+.modality-card h4{font-size:19px; margin-bottom:6px;}
+.modality-card p.m-desc{color:var(--text-2); font-size:14px; margin-bottom:16px;}
+.m-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px;}
+.m-tag{font-size:12px; padding:4px 10px; border-radius:6px; background:var(--bg); border:1px solid var(--border); color:var(--text-2);}
+
+/* ============ LEARNING HUB ============ */
+.hub-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+.hub-card{border-radius:var(--radius-lg); padding:30px; border:1px solid var(--border); background:#fff;}
+.hub-card .hub-tag{font-family:var(--mono); font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--cyan); text-transform:uppercase;}
+.hub-card h4{font-size:21px; margin:10px 0 18px;}
+.hub-list{display:flex; flex-direction:column; gap:2px;}
+.hub-list li{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:11px 0; border-top:1px solid var(--border); font-size:14.5px; color:var(--text);
+}
+.hub-list li:first-child{border-top:none;}
+.hub-list li svg{color:var(--text-2); opacity:0; transition:opacity .15s;}
+.hub-list li:hover svg{opacity:1;}
+.hub-list li:hover{color:var(--blue); cursor:pointer;}
+
+/* ============ CASE OF THE WEEK ============ */
+.case-panel{
+  display:grid; grid-template-columns:0.95fr 1.05fr; gap:0; border-radius:var(--radius-lg);
+  overflow:hidden; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow-sm);
+}
+.case-image{position:relative; background:#000; min-height:440px;}
+.case-body{padding:44px;}
+.case-meta{display:flex; gap:10px; align-items:center; margin-bottom:18px;}
+.case-body h3{font-size:26px; margin-bottom:12px;}
+.case-hx{color:var(--text-2); font-size:15px; margin-bottom:24px; line-height:1.6;}
+.case-q{font-weight:700; font-size:15px; margin-bottom:14px; color:var(--navy);}
+.case-options{display:flex; flex-direction:column; gap:10px; margin-bottom:24px;}
+.case-opt{
+  padding:13px 16px; border:1px solid var(--border); border-radius:10px; font-size:14.5px; font-weight:500;
+  background:#fff; text-align:left; transition:all .15s ease; display:flex; justify-content:space-between; align-items:center;
+}
+.case-opt:hover{border-color:var(--blue); background:rgba(23,105,170,.04);}
+.case-opt.correct{border-color:var(--success); background:rgba(22,163,74,.06); color:var(--success);}
+.case-reveal{
+  display:none; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:20px; margin-bottom:22px;
+}
+.case-reveal.show{display:block; animation:fadein .3s ease;}
+@keyframes fadein{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+.case-reveal .dx{font-size:17px; font-weight:700; color:var(--navy); margin-bottom:10px;}
+.case-reveal ul{display:flex; flex-direction:column; gap:6px;}
+.case-reveal ul li{font-size:14px; color:var(--text-2); padding-left:16px; position:relative;}
+.case-reveal ul li::before{content:"—"; position:absolute; left:0; color:var(--cyan);}
+
+/* ============ PROTOCOLS ============ */
+.search-bar{
+  display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--border);
+  border-radius:12px; padding:14px 18px; max-width:560px; margin-bottom:24px;
+}
+.search-bar input{border:none; outline:none; flex:1; font-size:15px; font-family:inherit; background:transparent;}
+.search-bar svg{color:var(--text-2); flex-shrink:0;}
+.filter-row{display:flex; gap:10px; margin-bottom:36px; flex-wrap:wrap;}
+.filter-chip{
+  padding:9px 16px; border-radius:8px; border:1px solid var(--border); background:#fff; font-size:13.5px;
+  font-weight:500; color:var(--text-2); display:flex; align-items:center; gap:6px;
+}
+.filter-chip.active{background:var(--navy); color:#fff; border-color:var(--navy);}
+.protocol-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+.protocol-card{
+  border:1px solid var(--border); background:#fff; border-radius:12px; padding:22px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.protocol-top{display:flex; justify-content:space-between; align-items:flex-start;}
+.protocol-card h4{font-size:16.5px;}
+.protocol-meta{display:flex; gap:8px; flex-wrap:wrap;}
+.protocol-arrow{color:var(--text-2); transition:transform .15s, color .15s;}
+.protocol-card:hover .protocol-arrow{transform:translateX(3px); color:var(--blue);}
+
+/* ============ TOOLS ============ */
+.tool-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+.tool-card{
+  border:1px solid var(--border); background:#fff; border-radius:var(--radius-md); padding:26px;
+  display:flex; align-items:flex-start; gap:16px;
+}
+.tool-icon{
+  width:44px; height:44px; border-radius:10px; background:var(--navy); color:#fff;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.tool-card h4{font-size:16px; margin-bottom:4px;}
+.tool-card p{font-size:13.5px; color:var(--text-2);}
+
+/* ============ EXAM CENTER ============ */
+.exam-section{background:radial-gradient(ellipse at top right, #122d4a 0%, var(--navy) 55%, #081522 100%); color:#fff; padding:96px 0;}
+.exam-section .eyebrow{color:var(--cyan);}
+.exam-section .section-title{color:#fff;}
+.exam-section .section-sub{color:rgba(255,255,255,.65);}
+.exam-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:8px;}
+.exam-card{
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); border-radius:14px; padding:24px;
+  transition:background .2s, border-color .2s;
+}
+.exam-card:hover{background:rgba(255,255,255,.07); border-color:rgba(24,182,201,.4);}
+.exam-card .ec-num{font-family:var(--mono); font-size:12px; color:var(--cyan); letter-spacing:.05em;}
+.exam-card h4{color:#fff; font-size:17px; margin:10px 0 16px;}
+.exam-card .ec-bar{height:4px; background:rgba(255,255,255,.1); border-radius:4px; overflow:hidden; margin-bottom:14px;}
+.exam-card .ec-bar span{display:block; height:100%; background:linear-gradient(90deg, var(--blue), var(--cyan));}
+.exam-card .ec-foot{display:flex; justify-content:space-between; align-items:center; font-size:13px; color:rgba(255,255,255,.55);}
+.exam-cta-row{text-align:center; margin-top:40px;}
+
+/* ============ IMAGE LIBRARY ============ */
+.img-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+.img-card{border:1px solid var(--border); background:#fff; border-radius:12px; overflow:hidden;}
+.img-thumb{position:relative; aspect-ratio:1/1; background:#000; overflow:hidden;}
+.img-thumb .corner{position:absolute; font-family:var(--mono); font-size:8.5px; color:rgba(255,255,255,.65); z-index:2;}
+.img-thumb .tl{top:8px; left:8px;} .img-thumb .tr{top:8px; right:8px; text-align:right;}
+.img-thumb .bl{bottom:8px; left:8px;} .img-thumb .br{bottom:8px; right:8px; text-align:right;}
+.img-meta{padding:14px 16px;}
+.img-meta .im-top{display:flex; justify-content:space-between; margin-bottom:6px;}
+.img-meta h5{font-size:14px; font-weight:700; color:var(--navy);}
+.img-meta p{font-size:12.5px; color:var(--text-2);}
+
+/* ============ QUICK REVISION ============ */
+.qr-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
+.qr-card{
+  border:1px solid var(--border); background:#fff; border-radius:12px; padding:22px 18px;
+  display:flex; flex-direction:column; gap:14px; min-height:150px;
+}
+.qr-time{font-family:var(--mono); font-size:11.5px; color:var(--cyan); font-weight:600;}
+.qr-card h5{font-size:15px; line-height:1.35;}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;}
+.about-principles{display:flex; flex-direction:column; gap:22px; margin-top:26px;}
+.principle{display:flex; gap:16px;}
+.principle .p-mark{
+  width:34px; height:34px; border-radius:8px; background:var(--navy); color:#fff; font-family:var(--mono);
+  font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.principle h5{font-size:15.5px; margin-bottom:3px;}
+.principle p{font-size:14px; color:var(--text-2);}
+.about-visual{border-radius:var(--radius-lg); overflow:hidden; border:1px solid var(--border); aspect-ratio:1/0.9; background:#000; position:relative;}
+
+/* ============ DISCLAIMER ============ */
+.disclaimer{background:#fff; border-top:1px solid var(--border); padding:28px 0;}
+.disclaimer-box{
+  display:flex; gap:14px; align-items:flex-start; background:var(--bg); border:1px solid var(--border);
+  border-radius:10px; padding:16px 20px; font-size:13.5px; color:var(--text-2);
+}
+.disclaimer-box svg{color:var(--blue); flex-shrink:0; margin-top:1px;}
+
+/* ============ FOOTER ============ */
+footer{background:var(--navy); color:rgba(255,255,255,.75); padding:64px 0 32px;}
+.footer-top{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand .logo{color:#fff;}
+.footer-brand p{margin-top:14px; font-size:14px; color:rgba(255,255,255,.55); max-width:260px;}
+.footer-col h6{color:#fff; font-size:13px; letter-spacing:.05em; text-transform:uppercase; margin-bottom:16px; font-weight:700;}
+.footer-col ul{display:flex; flex-direction:column; gap:11px;}
+.footer-col a{font-size:14px; color:rgba(255,255,255,.62); transition:color .15s;}
+.footer-col a:hover{color:var(--cyan);}
+.footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:28px; flex-wrap:wrap; gap:14px;}
+.footer-bottom p{font-size:13px; color:rgba(255,255,255,.45);}
+.footer-legal{display:flex; gap:22px;}
+.footer-legal a{font-size:13px; color:rgba(255,255,255,.5);}
+
+/* ============ SEARCH MODAL ============ */
+.search-modal-overlay{
+  display:none; position:fixed; inset:0; background:rgba(11,31,51,.55); z-index:200;
+  align-items:flex-start; justify-content:center; padding-top:10vh; backdrop-filter:blur(2px);
+}
+.search-modal-overlay.open{display:flex;}
+.search-modal{
+  background:#fff; border-radius:16px; width:100%; max-width:640px; max-height:72vh; overflow:hidden;
+  box-shadow:var(--shadow-lg); display:flex; flex-direction:column;
+}
+.search-modal-head{display:flex; align-items:center; gap:12px; padding:18px 22px; border-bottom:1px solid var(--border);}
+.search-modal-head input{flex:1; border:none; outline:none; font-size:16px; font-family:inherit;}
+.search-modal-body{overflow-y:auto; padding:8px 0;}
+.sm-category{padding:10px 22px 4px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-2);}
+.sm-result{display:flex; justify-content:space-between; align-items:center; padding:11px 22px; font-size:14.5px;}
+.sm-result:hover{background:var(--bg); cursor:pointer;}
+.sm-result span.rtype{font-size:12px; color:var(--text-2);}
+.sm-empty{padding:40px 22px; text-align:center; color:var(--text-2); font-size:14px;}
+
+/* ============ BOTTOM NAV (mobile) ============ */
+.bottom-nav{display:none;}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 980px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{order:-1;}
+  .modality-grid, .hub-grid, .exam-grid{grid-template-columns:repeat(2,1fr);}
+  .protocol-grid, .tool-grid{grid-template-columns:repeat(2,1fr);}
+  .img-grid{grid-template-columns:repeat(3,1fr);}
+  .qr-grid{grid-template-columns:repeat(2,1fr);}
+  .case-panel{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .value-items{justify-content:flex-start;}
+}
+@media (max-width: 720px){
+  .nav-links, .nav-actions .btn-secondary{display:none;}
+  .hamburger{display:flex; width:38px; height:38px; align-items:center; justify-content:center; border-radius:8px; color:var(--navy);}
+  .modality-grid, .hub-grid, .exam-grid, .protocol-grid, .tool-grid{grid-template-columns:1fr;}
+  .img-grid{grid-template-columns:repeat(2,1fr);}
+  .qr-grid{grid-template-columns:repeat(2,1fr);}
+  .section{padding:64px 0;}
+  .case-body{padding:28px;}
+  .footer-top{grid-template-columns:1fr;}
+  body{padding-bottom:64px;}
+  .bottom-nav{
+    display:flex; position:fixed; bottom:0; left:0; right:0; z-index:150;
+    background:rgba(255,255,255,.95); backdrop-filter:blur(10px); border-top:1px solid var(--border);
+    justify-content:space-around; padding:8px 0 10px;
+  }
+  .bottom-nav a{display:flex; flex-direction:column; align-items:center; gap:4px; font-size:10.5px; color:var(--text-2); font-weight:600;}
+  .bottom-nav a.active{color:var(--blue);}
+  .mobile-menu{
+    display:none; position:fixed; inset:0; z-index:190; background:#fff; padding:24px;
+  }
+  .mobile-menu.open{display:block;}
+  .mobile-menu-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:32px;}
+  .mobile-menu a{display:block; padding:16px 4px; font-size:18px; font-weight:600; border-bottom:1px solid var(--border); color:var(--navy);}
+  .mobile-menu .btn{width:100%; margin-top:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="logo"><span class="logo-mark"></span>RADIO DX</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#modalities">Home</a>
+      <a href="#learn">Learn</a>
+      <a href="#case">Cases</a>
+      <a href="#protocols">Protocols</a>
+      <a href="#tools">Tools</a>
+      <a href="#exam">MCQs</a>
+      <a href="#resources">Resources</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn" aria-label="Search" onclick="openSearch()">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+      <a href="#" class="btn btn-secondary" style="padding:9px 16px; font-size:14px;">Sign In</a>
+      <a href="#" class="btn btn-primary" style="padding:9px 18px; font-size:14px;">Get Started</a>
+      <button class="hamburger" aria-label="Open menu" onclick="toggleMobileMenu(true)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile fullscreen menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-head">
+    <span class="logo"><span class="logo-mark"></span>RADIO DX</span>
+    <button class="icon-btn" aria-label="Close menu" onclick="toggleMobileMenu(false)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <a href="#modalities" onclick="toggleMobileMenu(false)">Home</a>
+  <a href="#learn" onclick="toggleMobileMenu(false)">Learn</a>
+  <a href="#case" onclick="toggleMobileMenu(false)">Cases</a>
+  <a href="#protocols" onclick="toggleMobileMenu(false)">Protocols</a>
+  <a href="#tools" onclick="toggleMobileMenu(false)">Tools</a>
+  <a href="#exam" onclick="toggleMobileMenu(false)">MCQs</a>
+  <a href="#resources" onclick="toggleMobileMenu(false)">Resources</a>
+  <button class="btn btn-primary">Get Started</button>
+</div>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">RADIOLOGY • MEDICAL IMAGING • EDUCATION</span>
+      <h1 class="hero-headline">SEE.<br>UNDERSTAND.<br><span class="accent">DIAGNOSE.</span></h1>
+      <p class="hero-sub">Master radiology through visual concepts, real-world imaging cases, structured protocols, interactive tools and high-yield exam preparation.</p>
+      <div class="hero-cta">
+        <a href="#modalities" class="btn btn-primary">Explore Radiology</a>
+        <a href="#case" class="btn btn-secondary">Explore Cases</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>1,200+</b><span>Imaging cases</span></div>
+        <div class="hero-stat"><b>600+</b><span>Protocols</span></div>
+        <div class="hero-stat"><b>3,000+</b><span>Exam MCQs</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="scan-frame" id="heroScan">
+        <div class="topbar"><span>MRI · AXIAL · T2 FLAIR</span><span id="clockTime">SE 4 · IMG 18/32</span></div>
+        <div class="corner tl">PT: EDU-CASE-014<br>SEX: F · AGE: 45</div>
+        <div class="corner tr">TR 9000 · TE 120<br>FOV 230mm</div>
+        <svg class="scan-canvas" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="brainGrad" cx="50%" cy="46%" r="60%">
+              <stop offset="0%" stop-color="#dfe6ea"/>
+              <stop offset="35%" stop-color="#9aa7b0"/>
+              <stop offset="65%" stop-color="#4b5760"/>
+              <stop offset="100%" stop-color="#0a0d0f"/>
+            </radialGradient>
+            <radialGradient id="lesionGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#eafcff"/>
+              <stop offset="55%" stop-color="#18b6c9"/>
+              <stop offset="100%" stop-color="#0b3f47" stop-opacity="0"/>
+            </radialGradient>
+            <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0"/></filter>
+          </defs>
+          <rect width="400" height="460" fill="#000"/>
+          <ellipse cx="200" cy="210" rx="150" ry="180" fill="url(#brainGrad)"/>
+          <ellipse cx="200" cy="210" rx="150" ry="180" fill="none" stroke="#1b2226" stroke-width="3"/>
+          <path d="M120 140 Q160 110 200 120 Q240 110 280 140 Q290 210 260 270 Q230 320 200 315 Q170 320 140 270 Q110 210 120 140Z" fill="none" stroke="#2b353b" stroke-width="2" opacity="0.6"/>
+          <circle cx="235" cy="185" r="26" fill="url(#lesionGrad)"/>
+          <circle cx="235" cy="185" r="8" fill="#eafcff"/>
+          <rect width="400" height="460" filter="url(#grain)"/>
+        </svg>
+        <div class="crosshair" style="inset:0;"></div>
+        <div class="corner bl">W 350 / L 60</div>
+        <div class="corner br">ZOOM 1.4x</div>
+      </div>
+      <div class="float-card fc-1"><span class="fc-label"><span class="fc-dot"></span>MRI Brain</span><div class="fc-value">DWI · ADC</div></div>
+      <div class="float-card fc-2"><span class="fc-label"><span class="fc-dot"></span>Finding</span><div class="fc-value">Acute Infarct</div></div>
+      <div class="float-card fc-3"><span class="fc-label"><span class="fc-dot"></span>Module</span><div class="fc-value">MRI Physics · 12</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUE BAR ============ -->
+<section class="value-bar">
+  <div class="container">
+    <h3>Built for the next generation of imaging professionals</h3>
+    <div class="value-items">
+      <div class="value-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg><span>Visual Learning</span></div>
+      <div class="value-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg><span>Case-Based Learning</span></div>
+      <div class="value-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg><span>Protocol Library</span></div>
+      <div class="value-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span>Exam Preparation</span></div>
+      <div class="value-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span>Interactive Tools</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPLORE MODALITIES ============ -->
+<section class="section" id="modalities">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">EXPLORE MEDICAL IMAGING</span>
+      <h2 class="section-title">Every modality. One structured path.</h2>
+      <p class="section-sub" style="margin-left:auto; margin-right:auto;">From core physics to advanced pathology, explore each modality through a consistent, structured framework.</p>
+    </div>
+    <div class="modality-grid">
+
+      <div class="modality-card">
+        <div class="m-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5c0 1.5.7 2.4 1.5 3.2C9.3 11 10 12 10 13.5V21h4v-7.5c0-1.5.7-2.5 1.5-3.3.8-.8 1.5-1.7 1.5-3.2a5 5 0 0 0-5-5Z"/></svg></div>
+        <h4>MRI</h4>
+        <p class="m-desc">Magnetic Resonance Imaging — sequences, physics and pathology.</p>
+        <div class="m-tags"><span class="m-tag">Physics</span><span class="m-tag">Sequences</span><span class="m-tag">Protocols</span><span class="m-tag">Artifacts</span><span class="m-tag">Pathology</span></div>
+        <span class="btn-ghost">Explore MRI <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+
+      <div class="modality-card">
+        <div class="m-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M3 12h18M6 6l12 12M18 6L6 18"/></svg></div>
+        <h4>CT</h4>
+        <p class="m-desc">Computed Tomography — acquisition, contrast and dose optimization.</p>
+        <div class="m-tags"><span class="m-tag">Physics</span><span class="m-tag">Protocols</span><span class="m-tag">Contrast</span><span class="m-tag">Dosimetry</span><span class="m-tag">Artifacts</span></div>
+        <span class="btn-ghost">Explore CT <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+
+      <div class="modality-card">
+        <div class="m-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <h4>X-RAY</h4>
+        <p class="m-desc">Radiography — positioning, anatomy and pattern recognition.</p>
+        <div class="m-tags"><span class="m-tag">Positioning</span><span class="m-tag">Physics</span><span class="m-tag">Radiographic Anatomy</span><span class="m-tag">Pathology</span></div>
+        <span class="btn-ghost">Explore X-Ray <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+
+      <div class="modality-card">
+        <div class="m-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10c4-6 14-6 18 0"/><path d="M6 13c2.5-3.5 9.5-3.5 12 0"/><circle cx="12" cy="17" r="2"/></svg></div>
+        <h4>ULTRASOUND</h4>
+        <p class="m-desc">Sonography — physics fundamentals, Doppler and artifact recognition.</p>
+        <div class="m-tags"><span class="m-tag">Basics</span><span class="m-tag">Doppler</span><span class="m-tag">Artifacts</span><span class="m-tag">Anatomy</span></div>
+        <span class="btn-ghost">Explore USG <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+
+      <div class="modality-card">
+        <div class="m-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></div>
+        <h4>NUCLEAR MEDICINE</h4>
+        <p class="m-desc">PET/CT and SPECT — radiopharmaceuticals and functional imaging.</p>
+        <div class="m-tags"><span class="m-tag">PET/CT</span><span class="m-tag">SPECT</span><span class="m-tag">Radiopharmaceuticals</span><span class="m-tag">Dosimetry</span></div>
+        <span class="btn-ghost">Explore Nuc Med <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+
+      <div class="modality-card">
+        <div class="m-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20L20 4M14 4h6v6"/><circle cx="7" cy="17" r="2"/></svg></div>
+        <h4>INTERVENTIONAL RADIOLOGY</h4>
+        <p class="m-desc">Image-guided procedures — biopsy, ablation and vascular access.</p>
+        <div class="m-tags"><span class="m-tag">Biopsy</span><span class="m-tag">RFA</span><span class="m-tag">MWA</span><span class="m-tag">Cryoablation</span></div>
+        <span class="btn-ghost">Explore IR <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEARNING HUB ============ -->
+<section class="section" id="learn" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">LEARNING HUB</span>
+      <h2 class="section-title">One Platform. Complete Radiology Learning.</h2>
+    </div>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <span class="hub-tag">Concepts</span>
+        <h4>Foundations</h4>
+        <ul class="hub-list">
+          <li>MRI Physics <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>CT Physics <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>X-Ray Physics <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Radiation Protection <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Image Formation <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Artifacts <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+        </ul>
+      </div>
+      <div class="hub-card">
+        <span class="hub-tag">Anatomy</span>
+        <h4>Regional Anatomy</h4>
+        <ul class="hub-list">
+          <li>Brain <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Head & Neck <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Chest <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Abdomen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Pelvis <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>MSK <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+        </ul>
+      </div>
+      <div class="hub-card">
+        <span class="hub-tag">Pathology</span>
+        <h4>Disease Patterns</h4>
+        <ul class="hub-list">
+          <li>Stroke <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Brain Tumors <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Lung Disease <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Liver Lesions <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Bone Tumors <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+          <li>Breast Imaging <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE OF THE WEEK ============ -->
+<section class="section" id="case">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">CASE OF THE WEEK</span>
+      <h2 class="section-title">Think it through, then reveal.</h2>
+    </div>
+    <div class="case-panel">
+      <div class="case-image">
+        <svg width="100%" height="100%" viewBox="0 0 400 460" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0;">
+          <defs>
+            <radialGradient id="brainGrad2" cx="50%" cy="46%" r="60%">
+              <stop offset="0%" stop-color="#dfe6ea"/><stop offset="35%" stop-color="#9aa7b0"/>
+              <stop offset="65%" stop-color="#4b5760"/><stop offset="100%" stop-color="#0a0d0f"/>
+            </radialGradient>
+            <radialGradient id="lesionGrad2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff"/><stop offset="55%" stop-color="#e6e9ea"/><stop offset="100%" stop-color="#4b5760" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="460" fill="#000"/>
+          <ellipse cx="200" cy="210" rx="150" ry="180" fill="url(#brainGrad2)"/>
+          <circle cx="175" cy="245" r="22" fill="url(#lesionGrad2)"/>
+        </svg>
+        <div class="corner tl" style="position:absolute; top:14px; left:14px; font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.65);">MRI · AXIAL T1 C+</div>
+        <div class="corner br" style="position:absolute; bottom:14px; right:14px; font-family:var(--mono); font-size:10px; color:rgba(255,255,255,.65);">CASE-014</div>
+      </div>
+      <div class="case-body">
+        <div class="case-meta"><span class="pill">MRI · BRAIN</span><span class="pill" style="background:rgba(24,182,201,.1); color:var(--cyan);">CONTRAST-ENHANCED</span></div>
+        <h3>Intracranial Lesion</h3>
+        <p class="case-hx"><b>Clinical history:</b> 45-year-old patient presenting with progressive headache.</p>
+        <p class="case-q">What do you see?</p>
+        <div class="case-options" id="caseOptions">
+          <button class="case-opt" onclick="revealCase(this,false)">Glioblastoma</button>
+          <button class="case-opt" onclick="revealCase(this,true)">PCNSL</button>
+          <button class="case-opt" onclick="revealCase(this,false)">Metastasis</button>
+          <button class="case-opt" onclick="revealCase(this,false)">Abscess</button>
+        </div>
+        <div class="case-reveal" id="caseReveal">
+          <div class="dx">Diagnosis: Primary CNS Lymphoma</div>
+          <p style="font-size:13px; color:var(--text-2); margin-bottom:10px;">Key imaging features:</p>
+          <ul>
+            <li>Diffusion restriction</li>
+            <li>Strong enhancement</li>
+            <li>Deep / periventricular location</li>
+            <li>Characteristic imaging pattern</li>
+          </ul>
+        </div>
+        <a href="#" class="btn btn-primary">View Full Case</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROTOCOLS ============ -->
+<section class="section" id="protocols" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">PROTOCOL LIBRARY</span>
+      <h2 class="section-title">Protocols. Structured. Searchable.</h2>
+    </div>
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" placeholder="Search MRI Brain, HRCT Chest, MRCP..." aria-label="Search protocols">
+    </div>
+    <div class="filter-row">
+      <button class="filter-chip active">Modality</button>
+      <button class="filter-chip">Body Region</button>
+      <button class="filter-chip">Examination</button>
+      <button class="filter-chip">Contrast</button>
+    </div>
+    <div class="protocol-grid">
+      <div class="protocol-card"><div class="protocol-top"><h4>MRI Brain</h4><svg class="protocol-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="protocol-meta"><span class="m-tag">MRI</span><span class="m-tag">Neuro</span></div></div>
+      <div class="protocol-card"><div class="protocol-top"><h4>MRI Spine</h4><svg class="protocol-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="protocol-meta"><span class="m-tag">MRI</span><span class="m-tag">Spine</span></div></div>
+      <div class="protocol-card"><div class="protocol-top"><h4>CT Chest</h4><svg class="protocol-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="protocol-meta"><span class="m-tag">CT</span><span class="m-tag">Chest</span></div></div>
+      <div class="protocol-card"><div class="protocol-top"><h4>HRCT Chest</h4><svg class="protocol-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="protocol-meta"><span class="m-tag">CT</span><span class="m-tag">Chest</span></div></div>
+      <div class="protocol-card"><div class="protocol-top"><h4>CT Abdomen</h4><svg class="protocol-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="protocol-meta"><span class="m-tag">CT</span><span class="m-tag">Abdomen</span></div></div>
+      <div class="protocol-card"><div class="protocol-top"><h4>MRCP</h4><svg class="protocol-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="protocol-meta"><span class="m-tag">MRI</span><span class="m-tag">Abdomen</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TOOLS ============ -->
+<section class="section" id="tools">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">RADIOLOGY TOOLS</span>
+      <h2 class="section-title">Calculate, Compare and Understand Imaging Parameters.</h2>
+    </div>
+    <div class="tool-grid">
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div><div><h4>CT Dose Calculator</h4><p>Estimate CTDIvol & DLP from scan parameters.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a5 5 0 0 0-5 5c0 1.5.7 2.4 1.5 3.2C9.3 11 10 12 10 13.5V21h4v-7.5c0-1.5.7-2.5 1.5-3.3.8-.8 1.5-1.7 1.5-3.2a5 5 0 0 0-5-5Z"/></svg></div><div><h4>MRI Calculator</h4><p>SAR, scan time and resolution estimation.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div><div><h4>Contrast Calculator</h4><p>Weight-based contrast dosing reference.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l4-8h10l4 8-9 9-9-9Z"/></svg></div><div><h4>Radiation Dose Calculator</h4><p>Compare effective dose across modalities.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M5 8h14M5 16h14"/></svg></div><div><h4>BMI Calculator</h4><p>Quick reference for protocol adjustment.</p></div></div>
+      <div class="tool-card"><div class="tool-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h10M7 12h10M7 17h6"/></svg></div><div><h4>Unit Converter</h4><p>Convert imaging units — HU, mSv, mGy and more.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXAM CENTER ============ -->
+<section class="exam-section" id="exam">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">EXAM CENTER</span>
+      <h2 class="section-title">MASTER YOUR EXAM.</h2>
+      <p class="section-sub" style="margin-left:auto; margin-right:auto;">High-yield questions designed for radiology and medical imaging students.</p>
+    </div>
+    <div class="exam-grid">
+      <div class="exam-card"><span class="ec-num">01</span><h4>MRI Physics</h4><div class="ec-bar"><span style="width:62%"></span></div><div class="ec-foot"><span>100 MCQs</span><span>62% avg</span></div></div>
+      <div class="exam-card"><span class="ec-num">02</span><h4>CT Technology</h4><div class="ec-bar"><span style="width:48%"></span></div><div class="ec-foot"><span>100 MCQs</span><span>48% avg</span></div></div>
+      <div class="exam-card"><span class="ec-num">03</span><h4>Radiation Physics</h4><div class="ec-bar"><span style="width:71%"></span></div><div class="ec-foot"><span>100 MCQs</span><span>71% avg</span></div></div>
+      <div class="exam-card"><span class="ec-num">04</span><h4>Nuclear Medicine</h4><div class="ec-bar"><span style="width:39%"></span></div><div class="ec-foot"><span>100 MCQs</span><span>39% avg</span></div></div>
+      <div class="exam-card"><span class="ec-num">05</span><h4>Radiographic Anatomy</h4><div class="ec-bar"><span style="width:55%"></span></div><div class="ec-foot"><span>100 MCQs</span><span>55% avg</span></div></div>
+      <div class="exam-card"><span class="ec-num">06</span><h4>Image-Based Questions</h4><div class="ec-bar"><span style="width:44%"></span></div><div class="ec-foot"><span>100 Cases</span><span>44% avg</span></div></div>
+    </div>
+    <div class="exam-cta-row"><a href="#" class="btn btn-primary" style="background:linear-gradient(135deg, var(--blue), var(--cyan));">Start Practicing</a></div>
+  </div>
+</section>
+
+<!-- ============ IMAGE LIBRARY ============ -->
+<section class="section" id="resources">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">IMAGE LIBRARY</span>
+      <h2 class="section-title">THE RADIOLOGY IMAGE LIBRARY</h2>
+    </div>
+    <div class="filter-row">
+      <button class="filter-chip active">MRI</button>
+      <button class="filter-chip">CT</button>
+      <button class="filter-chip">X-Ray</button>
+      <button class="filter-chip">USG</button>
+      <button class="filter-chip">PET/CT</button>
+    </div>
+    <div class="img-grid">
+      <div class="img-card">
+        <div class="img-thumb"><span class="corner tl">MRI</span><span class="corner tr">T2</span>
+          <svg width="100%" height="100%" viewBox="0 0 200 200" style="position:absolute;inset:0;"><rect width="200" height="200" fill="#000"/><ellipse cx="100" cy="105" rx="72" ry="85" fill="#8f9ba3"/><circle cx="120" cy="90" r="12" fill="#18b6c9" opacity="0.85"/></svg>
+          <span class="corner bl">AX</span><span class="corner br">014</span>
+        </div>
+        <div class="img-meta"><div class="im-top"><h5>Brain</h5><span class="pill">MRI</span></div><p>Acute infarct — DWI restriction</p></div>
+      </div>
+      <div class="img-card">
+        <div class="img-thumb"><span class="corner tl">CT</span><span class="corner tr">C+</span>
+          <svg width="100%" height="100%" viewBox="0 0 200 200" style="position:absolute;inset:0;"><rect width="200" height="200" fill="#000"/><ellipse cx="100" cy="100" rx="80" ry="60" fill="#6b7680"/><ellipse cx="70" cy="95" rx="20" ry="26" fill="#1a1f22"/><ellipse cx="130" cy="95" rx="20" ry="26" fill="#1a1f22"/></svg>
+          <span class="corner bl">AX</span><span class="corner br">022</span>
+        </div>
+        <div class="img-meta"><div class="im-top"><h5>Chest</h5><span class="pill">CT</span></div><p>Ground-glass opacities</p></div>
+      </div>
+      <div class="img-card">
+        <div class="img-thumb"><span class="corner tl">XR</span><span class="corner tr">AP</span>
+          <svg width="100%" height="100%" viewBox="0 0 200 200" style="position:absolute;inset:0;"><rect width="200" height="200" fill="#050505"/><rect x="50" y="30" width="100" height="140" rx="30" fill="#dcdcdc" opacity="0.85"/><rect x="70" y="40" width="10" height="120" fill="#050505"/><rect x="120" y="40" width="10" height="120" fill="#050505"/></svg>
+          <span class="corner bl">CHEST</span><span class="corner br">031</span>
+        </div>
+        <div class="img-meta"><div class="im-top"><h5>Chest</h5><span class="pill">X-Ray</span></div><p>Cardiomegaly, PA view</p></div>
+      </div>
+      <div class="img-card">
+        <div class="img-thumb"><span class="corner tl">USG</span><span class="corner tr">B-Mode</span>
+          <svg width="100%" height="100%" viewBox="0 0 200 200" style="position:absolute;inset:0;"><rect width="200" height="200" fill="#020202"/><path d="M0 200 L100 20 L200 200Z" fill="#3a4046" opacity="0.9"/><circle cx="100" cy="120" r="22" fill="#0d0f10"/></svg>
+          <span class="corner bl">RUQ</span><span class="corner br">045</span>
+        </div>
+        <div class="img-meta"><div class="im-top"><h5>Liver</h5><span class="pill">USG</span></div><p>Hepatic cyst, anechoic lesion</p></div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:36px;"><a href="#" class="btn btn-secondary">Analyze Image</a></div>
+  </div>
+</section>
+
+<!-- ============ QUICK REVISION ============ -->
+<section class="section" style="background:#fff; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">QUICK REVISION</span>
+      <h2 class="section-title">5-MINUTE RADIOLOGY</h2>
+    </div>
+    <div class="qr-grid">
+      <div class="qr-card"><span class="qr-time">4 MIN READ</span><h5>MRI Artifacts</h5></div>
+      <div class="qr-card"><span class="qr-time">3 MIN READ</span><h5>CT Dose</h5></div>
+      <div class="qr-card"><span class="qr-time">5 MIN READ</span><h5>DWI vs ADC</h5></div>
+      <div class="qr-card"><span class="qr-time">4 MIN READ</span><h5>T1 vs T2</h5></div>
+      <div class="qr-card"><span class="qr-time">3 MIN READ</span><h5>CT Windowing</h5></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section">
+  <div class="container about-grid">
+    <div>
+      <span class="eyebrow">ABOUT RADIO DX</span>
+      <h2 class="section-title">Built to Make Imaging Easier.</h2>
+      <p class="section-sub">RADIO DX is a medical imaging education platform built around one simple idea: radiology becomes easier when complex concepts are visualized, structured and connected to clinical practice.</p>
+      <div class="about-principles">
+        <div class="principle"><span class="p-mark">01</span><div><h5>VISUAL</h5><p>Learn through images.</p></div></div>
+        <div class="principle"><span class="p-mark">02</span><div><h5>STRUCTURED</h5><p>Concepts → Protocols → Cases → Practice.</p></div></div>
+        <div class="principle"><span class="p-mark">03</span><div><h5>PRACTICAL</h5><p>Connect theory with real imaging workflows.</p></div></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <svg width="100%" height="100%" viewBox="0 0 400 360" preserveAspectRatio="xMidYMid slice" style="position:absolute; inset:0;">
+        <rect width="400" height="360" fill="#000"/>
+        <ellipse cx="200" cy="180" rx="150" ry="110" fill="#6b7680"/>
+        <ellipse cx="200" cy="180" rx="150" ry="110" fill="none" stroke="#20262a" stroke-width="2"/>
+        <circle cx="150" cy="150" r="18" fill="#18b6c9" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DISCLAIMER ============ -->
+<section class="disclaimer">
+  <div class="container">
+    <div class="disclaimer-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+      <span>RADIO DX is an educational platform and is not a substitute for professional medical advice, diagnosis or treatment.</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="logo"><span class="logo-mark"></span>RADIO DX</span>
+        <p>SEE. UNDERSTAND. DIAGNOSE.<br>Medical Imaging, Simplified.</p>
+      </div>
+      <div class="footer-col"><h6>Platform</h6><ul>
+        <li><a href="#learn">Learn</a></li><li><a href="#case">Cases</a></li><li><a href="#protocols">Protocols</a></li>
+        <li><a href="#tools">Tools</a></li><li><a href="#exam">MCQs</a></li><li><a href="#resources">Resources</a></li><li><a href="#">About</a></li>
+      </ul></div>
+      <div class="footer-col"><h6>Resources</h6><ul>
+        <li><a href="#">MRI</a></li><li><a href="#">CT</a></li><li><a href="#">X-Ray</a></li>
+        <li><a href="#">Ultrasound</a></li><li><a href="#">Nuclear Medicine</a></li><li><a href="#">Interventional Radiology</a></li>
+      </ul></div>
+      <div class="footer-col"><h6>Legal</h6><ul>
+        <li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li><li><a href="#">Medical Disclaimer</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 RADIO DX. Educational platform for medical imaging.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BOTTOM NAV (mobile) ============ -->
+<nav class="bottom-nav" aria-label="Mobile primary">
+  <a href="#modalities" class="active"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg>Home</a>
+  <a href="#learn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>Learn</a>
+  <a href="#case"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>Cases</a>
+  <a href="#tools"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>Tools</a>
+  <a href="#"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a7 7 0 0 1 14 0v1"/></svg>Profile</a>
+</nav>
+
+<!-- ============ SEARCH MODAL ============ -->
+<div class="search-modal-overlay" id="searchOverlay" onclick="if(event.target===this) closeSearch()">
+  <div class="search-modal">
+    <div class="search-modal-head">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" id="globalSearchInput" placeholder="Search concepts, protocols, cases, MCQs, images..." oninput="runSearch(this.value)" autocomplete="off">
+      <button class="icon-btn" onclick="closeSearch()" aria-label="Close search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="search-modal-body" id="searchResults"></div>
+  </div>
+</div>
+
+<script>
+// Mock searchable index across categories
+const SEARCH_INDEX = {
+  Concepts: ["MRI Physics","CT Physics","X-Ray Physics","Radiation Protection","Image Formation","Artifacts","DWI vs ADC","T1 vs T2","CT Windowing"],
+  Protocols: ["MRI Brain","MRI Spine","CT Chest","HRCT Chest","CT Abdomen","MRCP"],
+  Cases: ["Intracranial Lesion — PCNSL","Acute Infarct","Hepatic Cyst","Ground-glass Opacities"],
+  MCQs: ["MRI Physics — 100 MCQs","CT Technology — 100 MCQs","Radiation Physics — 100 MCQs","Nuclear Medicine — 100 MCQs"],
+  Images: ["MRI Brain — Acute Infarct","CT Chest — GGOs","X-Ray Chest — Cardiomegaly","USG Liver — Cyst"],
+  "Quick Revision": ["MRI Artifacts","CT Dose","DWI vs ADC","T1 vs T2","CT Windowing"]
+};
+
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  const input = document.getElementById('globalSearchInput');
+  input.value=''; runSearch('');
+  setTimeout(()=>input.focus(), 50);
+}
+function closeSearch(){ document.getElementById('searchOverlay').classList.remove('open'); }
+document.addEventListener('keydown', (e)=>{
+  if((e.metaKey||e.ctrlKey) && e.key==='k'){ e.preventDefault(); openSearch(); }
+  if(e.key==='Escape'){ closeSearch(); toggleMobileMenu(false); }
+});
+function runSearch(q){
+  const box = document.getElementById('searchResults');
+  box.innerHTML='';
+  const query = q.trim().toLowerCase();
+  let any=false;
+  Object.keys(SEARCH_INDEX).forEach(cat=>{
+    const matches = query==='' ? SEARCH_INDEX[cat].slice(0,3) : SEARCH_INDEX[cat].filter(i=>i.toLowerCase().includes(query));
+    if(matches.length){
+      any=true;
+      const h = document.createElement('div'); h.className='sm-category'; h.textContent=cat; box.appendChild(h);
+      matches.forEach(m=>{
+        const r=document.createElement('div'); r.className='sm-result';
+        r.innerHTML = '<span>'+m+'</span><span class="rtype">'+cat+'</span>';
+        box.appendChild(r);
+      });
+    }
+  });
+  if(!any){ box.innerHTML='<div class="sm-empty">No results found. Try a different term.</div>'; }
+}
+
+function revealCase(el, isCorrect){
+  document.querySelectorAll('#caseOptions .case-opt').forEach(o=>o.disabled=true);
+  if(isCorrect){ el.classList.add('correct'); }
+  document.getElementById('caseReveal').classList.add('show');
+}
+
+function toggleMobileMenu(open){
+  document.getElementById('mobileMenu').classList.toggle('open', open);
+}
+
+// Filter chip toggling (cosmetic, scoped per filter-row)
+document.querySelectorAll('.filter-row').forEach(row=>{
+  row.addEventListener('click', (e)=>{
+    const chip = e.target.closest('.filter-chip');
+    if(!chip) return;
+    row.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
